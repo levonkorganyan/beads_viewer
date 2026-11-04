@@ -1,5 +1,30 @@
 # Beads Viewer (bv)
 
+This fork opens a focused milestone tree by default. Milestones are ordinary
+Beads epics labeled `milestone`; membership uses existing `parent-child`
+relationships. No backend changes or migration are required.
+
+```text
+STATUS       MILESTONE / ISSUE
+OPEN         ▾ M1: Ship the release                  1/2 done
+CLOSED           ├── • Implement the compiler
+IN PROGRESS      └── • Verify the integration
+```
+
+Use `m` to create a milestone, `M` to create a milestone under the selected
+item, and `n` to create a child issue. Arrow keys navigate and fold the tree;
+Space toggles a branch, `o` expands all, and `O` collapses all. Enter opens
+the selected issue's description and comments; Esc returns to the tree.
+Changes made by agents refresh every two seconds; `r` refreshes immediately.
+Creation uses the source's verified `br` or `bd` CLI. Imported and historical
+sources remain read-only. Explicit recipes and multi-repository workspaces
+use the original interface, also available with `bv --classic`.
+
+Build with `go build -o bv-milestones ./cmd/bv`. For a text preview, run
+`./bv-milestones --debug-render milestones --debug-width 110 --debug-height 42`
+from a Beads project. Progress counts completed descendant leaf issues and
+excludes milestone containers.
+
 ![Release](https://img.shields.io/github/v/release/Dicklesworthstone/beads_viewer?style=for-the-badge&color=bd93f9)
 ![Go Version](https://img.shields.io/github/go-mod/go-version/Dicklesworthstone/beads_viewer?style=for-the-badge&color=6272a4)
 ![License](https://img.shields.io/badge/License-MIT%2BOpenAI%2FAnthropic%20Rider-blue-the-badge)

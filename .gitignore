@@ -82,3 +82,6 @@ benchmarks/reference.txt
 
 # Remote compilation helper cache (AGENTS.md says it is ignored; it was not)
 .rch-go/
+
+# Local build of this fork
+/bv-milestones

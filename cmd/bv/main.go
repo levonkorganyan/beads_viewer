@@ -1646,6 +1646,7 @@ func main() {
 	pagesWizard := flag.Bool("pages", false, "Launch interactive Pages deployment wizard")
 	// Debug rendering flag (for diagnosing TUI issues)
 	debugRender := flag.String("debug-render", "", "Render a view and output to file (views: insights, board)")
+	classicView := flag.Bool("classic", false, "Open the original graph/triage interface instead of the milestone tree")
 	debugWidth := flag.Int("debug-width", 180, "Width for debug render")
 	debugHeight := flag.Int("debug-height", 50, "Height for debug render")
 	// Explicit light/dark palette selection for terminals where background
@@ -4321,7 +4322,7 @@ func main() {
 			os.Exit(0)
 		}
 
-		if len(issues) == 0 {
+		if len(issues) == 0 && *classicView {
 			fmt.Println("No issues found. Create some with 'br create'!")
 			os.Exit(0)
 		}
@@ -4348,6 +4349,18 @@ func main() {
 			} else {
 				_ = os.Setenv("BV_BACKGROUND_MODE", "0")
 			}
+		}
+
+		// The focused tree is the default for a single live source. Explicit
+		// recipes and multi-repository workspaces retain their specialized UI.
+		if !*classicView && workspaceInfo == nil && activeRecipe == nil && (*debugRender == "" || *debugRender == "milestones") {
+			m := ui.NewMilestoneModel(issues, beadsPath)
+			if *debugRender == "milestones" {
+				_, _ = m.Update(tea.WindowSizeMsg{Width: *debugWidth, Height: *debugHeight})
+				fmt.Println(m.View())
+				return nil
+			}
+			return runTUIProgram(m)
 		}
 
 		// Initial Model with live reload support
@@ -4401,7 +4414,7 @@ func main() {
 	}
 }
 
-func runTUIProgram(m *ui.Model) error {
+func runTUIProgram(m tea.Model) error {
 	p := tea.NewProgram(
 		m,
 		tea.WithAltScreen(),
