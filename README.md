@@ -25,6 +25,14 @@ Build with `go build -o bv-milestones ./cmd/bv`. For a text preview, run
 from a Beads project. Progress counts completed descendant leaf issues and
 excludes milestone containers.
 
+Coding agents can use the [beads-milestones skill](skills/beads-milestones/SKILL.md)
+to create and organize milestones, claim tasks, record progress, and refresh
+the tree through the existing tracker CLI. Install it by symlinking that skill
+directory into `~/.codex/skills/beads-milestones` for Codex or
+`~/.claude/skills/beads-milestones` for Claude Code. For example, ask:
+"Use beads-milestones to organize the compiler work into milestones and start
+the next ready task in M1."
+
 ![Release](https://img.shields.io/github/v/release/Dicklesworthstone/beads_viewer?style=for-the-badge&color=bd93f9)
 ![Go Version](https://img.shields.io/github/go-mod/go-version/Dicklesworthstone/beads_viewer?style=for-the-badge&color=6272a4)
 ![License](https://img.shields.io/badge/License-MIT%2BOpenAI%2FAnthropic%20Rider-blue-the-badge)

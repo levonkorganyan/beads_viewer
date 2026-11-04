@@ -5,6 +5,12 @@ description: "Beads Viewer - Graph-aware triage engine for Beads projects. Compu
 
 # BV - Beads Viewer
 
+For milestone planning, creating or grouping issues, and keeping the default
+tree current, use [the beads-milestones skill](skills/beads-milestones/SKILL.md).
+The commands below cover the existing robot analysis API. The view shortcuts
+in this document refer to `bv --classic`; bare `bv` now opens the milestone tree
+for a single live source without an explicit recipe.
+
 A graph-aware triage engine for Beads projects (`.beads/issues.jsonl` in current `br` and Dolt-backed `bd` workspaces, with `.beads/beads.jsonl` supported for legacy workspaces). Computes graph metrics, generates execution plans, and explains recommendations. Human TUI for browsing; robot flags for AI agents. Compare source, scope, configuration, reference time and metric status when checking repeatability.
 
 ## Why BV vs Raw Beads

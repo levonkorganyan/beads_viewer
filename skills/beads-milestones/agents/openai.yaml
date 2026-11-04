@@ -1,0 +1,4 @@
+interface:
+  display_name: "Beads Milestones"
+  short_description: "Plan milestones and keep the bv issue tree current"
+  default_prompt: "Use $beads-milestones to organize this project's work into milestones and keep issue progress current."
